@@ -1,4 +1,4 @@
-import { BaseApi } from './BaseApi';
+import { FetchApi } from './FetchApi';
 import { AxiosApi } from './AxiosApi';
 
 
@@ -6,8 +6,8 @@ export class Api {
     constructor() 
     {
         // буква L
-        this.apiProvaider = new AxiosApi()
-        // this.apiProvaider = new BaseApi()
+        // this.apiProvaider = new AxiosApi()
+        this.apiProvaider = new FetchApi()
     }
 
     async fetch (url) {
