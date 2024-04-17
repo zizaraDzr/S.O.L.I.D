@@ -1,13 +1,29 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, reactive  } from "vue";
 import MyHeader from "../components/MyHeader.vue";
 import MyTodoList from "../components/MyTodoList.vue";
-import MyTodoCard from '../components/MyTodoCard.vue';
-import MyTodoRow from '../components/MyTodoRow.vue';
+import MyTodoCard from "../components/MyTodoCard.vue";
+import MyTodoRow from "../components/MyTodoRow.vue";
 import { Api } from "../services/api";
+import MyButton from "../components/MyButton.vue";
 
+const listText = {
+  card: "Вид карточками",
+  row: "Вид списком",
+};
 
 let todos = ref([]);
+let view = ref(false);
+let textBtn = reactive({ text: listText.card });
+
+// БУКВА - S
+// const fetchTodos = () => {
+//             fetch('https://jsonplaceholder.typicode.com/todos/')
+//                 .then((response) => response.json())
+//                 .then((response) => {
+//                     todos.value = response;
+//                 });
+//         };
 const fetchTodos = async () => {
   const api = new Api();
   return await api.fetch("todos");
@@ -15,11 +31,19 @@ const fetchTodos = async () => {
 onMounted(async () => {
   todos.value = await fetchTodos();
 });
+
+function toggleBtn() {
+  view.value = !view.value;
+  view.value
+    ? (textBtn.text = listText.row)
+    : (textBtn.text = listText.card);
+}
 </script>
 
 <template>
   <div>
     <MyHeader :listName="'List'" />
+    <MyButton @click-button="toggleBtn" :buttonText="textBtn.text"></MyButton>
     <main>
       <MyTodoList>
         <!-- Буква О  переключать между компонентами-->
@@ -54,7 +78,7 @@ onMounted(async () => {
   }
 }
 .container {
-  padding: 1.5rem;
+  padding: 1rem;
 }
 .todo-list {
   display: flex;
