@@ -1,18 +1,25 @@
 <script setup>
 const props = defineProps({
-  todo: {
-    type: Object,
-    default() {
-      return { completed: false, title: "default props", id: 0 };
-    },
+  id: {
+    type: Number,
+    default: 0,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+  title: {
+    type: String,
+    default: "",
   },
 });
 </script>
 
 <template>
   <div class="todo-list__row">
-    <span :class="{ 'todo-list__row--completed': todo.completed }">
-      {{ todo.title }}
+    <span>{{ id }}. </span>
+    <span :class="{ 'todo-list__row--completed': completed }">
+      {{ title }}
     </span>
   </div>
 </template>

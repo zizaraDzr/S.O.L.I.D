@@ -22,9 +22,23 @@ onMounted(async () => {
     <MyHeader :listName="'List'" />
     <main>
       <MyTodoList>
-        <!-- Буква О -->
-         <!-- <MyTodoCard v-for="todo in todos" :key="todo.id" :todo="todo"/> -->
-         <MyTodoRow v-for="todo in todos" :key="todo.id" :todo="todo"/>
+        <!-- Буква О  переключать между компонентами-->
+        <!-- Буква Iразделение одного пропса todo с объектом на разные пропсы  :title="todo.title" :completed="todo.completed"-->
+        <MyTodoCard
+          v-if="view"
+          v-for="todo in todos"
+          :key="todo.id"
+          :title="todo.title"
+          :completed="todo.completed"
+        />
+        <MyTodoRow
+          v-if="!view"
+          v-for="todo in todos"
+          :id="todo.id"
+          :key="todo.id"
+          :title="todo.title"
+          :completed="todo.completed"
+        />
       </MyTodoList>
     </main>
   </div>

@@ -1,11 +1,13 @@
 import { BaseApi } from './BaseApi';
-// буква L
 import { AxiosApi } from './AxiosApi';
 
 
 export class Api {
-    constructor() {
+    constructor() 
+    {
+        // буква L
         this.apiProvaider = new AxiosApi()
+        // this.apiProvaider = new BaseApi()
     }
 
     async fetch (url) {
